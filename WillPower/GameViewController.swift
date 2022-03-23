@@ -73,24 +73,30 @@ class GameViewController: UIViewController {
     @objc func swipedRight(){
         
         print("Swiped Right")
+        
         if let shield = game?.shield.component(ofType: WPSpriteComponent.self){
-            shield.sprite?.physicsBody = shield.sprite?.shieldBodyRight()
+            shield.sprite?.shieldRight()
+          //  shield.sprite?.physicsBody = shield.sprite?.shieldBodyRight()
         }
     }
     
     @objc func swipedLeft(){
         
         print("Swiped Left")
+        
         if let shield = game?.shield.component(ofType: WPSpriteComponent.self){
-            shield.sprite?.physicsBody = shield.sprite?.shieldBodyLeft()
+            shield.sprite?.shieldLeft()
+           // shield.sprite?.physicsBody = shield.sprite?.shieldBodyLeft()
         }
     }
     
     @objc func swipedUp(){
        
         print("Swiped Up")
+        
         if let shield = game?.shield.component(ofType: WPSpriteComponent.self){
-            shield.sprite?.physicsBody = shield.sprite?.shieldBodyUp()
+            shield.sprite?.shieldUp()
+          //  shield.sprite?.physicsBody = shield.sprite?.shieldBodyUp()
         }
         
     }
@@ -98,8 +104,10 @@ class GameViewController: UIViewController {
     @objc func swipedDown(){
         
         print("Swiped Down")
+        
         if let shield = game?.shield.component(ofType: WPSpriteComponent.self){
-            shield.sprite?.physicsBody = shield.sprite?.shieldBodyDown()
+            shield.sprite?.shieldDown()
+            //shield.sprite?.physicsBody = shield.sprite?.shieldBodyDown()
         }
         
     }

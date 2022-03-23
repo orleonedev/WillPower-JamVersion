@@ -79,7 +79,7 @@ class WPAttackComponent: GKComponent {
             projectile.position = CGPoint(x: game.player.position.x - 168, y: game.player.position.y)
             projectile.zRotation = 179.1
         }
-        
+        projectile.zPosition = 50
         let body = SKPhysicsBody(circleOfRadius: 16.0 )
         body.categoryBitMask = PhysicsCategory.projectile
         body.contactTestBitMask = PhysicsCategory.player + PhysicsCategory.shield

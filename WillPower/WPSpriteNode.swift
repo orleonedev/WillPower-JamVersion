@@ -9,42 +9,27 @@ import SpriteKit
 
 class WPSpriteNode: SKSpriteNode {
     weak var owner: WPSpriteComponent?
-    
-    func shieldBodyLeft() -> SKPhysicsBody {
-        let body = SKPhysicsBody(rectangleOf: CGSize(width: 32.0, height: 128.0), center: CGPoint(x: -48.0, y: 0.0))
-        
-        body.categoryBitMask = PhysicsCategory.shield
-        body.contactTestBitMask = PhysicsCategory.projectile
-        body.collisionBitMask = PhysicsCategory.none
-        
-        return body
+    var anchorSprite: WPSpriteNode?
+    func shieldLeft() {
+        self.position = CGPoint(x: (anchorSprite?.position.x ?? 0.0) - 52, y: (anchorSprite?.position.y ?? 0.0) )
+        self.zRotation = 89.53
+        anchorSprite?.run(SKAction(named: "shieldLeft")!)
     }
     
-    func shieldBodyUp() -> SKPhysicsBody {
-        let body = SKPhysicsBody(rectangleOf: CGSize(width: 128.0, height: 32.0), center: CGPoint(x: 0.0, y: 48.0))
-        
-        body.categoryBitMask = PhysicsCategory.shield
-        body.contactTestBitMask = PhysicsCategory.projectile
-        body.collisionBitMask = PhysicsCategory.none
-        
-        return body
+    func shieldUp() {
+        self.position = CGPoint(x: (anchorSprite?.position.x ?? 0.0), y: (anchorSprite?.position.y ?? 0.0) + 52)
+        self.zRotation = 0.0
+        anchorSprite?.run(SKAction(named: "shieldUp")!)
     }
-    func shieldBodyDown() -> SKPhysicsBody {
-        let body = SKPhysicsBody(rectangleOf: CGSize(width: 128.0, height: 32.0), center: CGPoint(x: 0.0, y: -48.0))
-        
-        body.categoryBitMask = PhysicsCategory.shield
-        body.contactTestBitMask = PhysicsCategory.projectile
-        body.collisionBitMask = PhysicsCategory.none
-        
-        return body
+    func shieldDown() {
+        self.position = CGPoint(x: (anchorSprite?.position.x ?? 0.0), y: (anchorSprite?.position.y ?? 0.0) - 52)
+        self.zRotation = 179.075
+        anchorSprite?.run(SKAction(named: "shieldDown")!)
     }
-    func shieldBodyRight() -> SKPhysicsBody {
-        let body = SKPhysicsBody(rectangleOf: CGSize(width: 32.0, height: 128.0), center: CGPoint(x: 48.0, y: 0.0))
-        
-        body.categoryBitMask = PhysicsCategory.shield
-        body.contactTestBitMask = PhysicsCategory.projectile
-        body.collisionBitMask = PhysicsCategory.none
-        
-        return body
+    func shieldRight() {
+        self.position = CGPoint(x: (anchorSprite?.position.x ?? 0.0) + 52, y: (anchorSprite?.position.y ?? 0.0) )
+        self.zRotation = -89.53
+        anchorSprite?.run(SKAction(named: "shieldRight")!)
     }
+    
 }

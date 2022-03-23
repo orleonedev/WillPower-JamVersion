@@ -35,6 +35,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     var player: WPEntity
     var shield: WPEntity
     var pointsLabel: SKLabelNode?
+    
     var score: Int = 0 {
         willSet {
             pointsLabel?.text = String(format: "%.6d", newValue)
@@ -77,12 +78,14 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     
     override init() {
         random = GKGaussianDistribution(randomSource: GKRandomSource(), mean: 1.0, deviation: 0.75)
-       
+        
         
         player = WPEntity()
         shield = WPEntity()
         enemy = WPEntity()
         super.init()
+        
+       
         let base = WPBaseStreakState(withGame: self)
         let double = WP2XStreakState(withGame: self)
         let triple = WP3XStreakState(withGame: self)
@@ -146,19 +149,27 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     
     func didMoveToView(scene: WPScene, view: SKView) {
         scene.backgroundColor = SKColor.init(hue: 150.0/255.0, saturation: 0.8, brightness: 0.1, alpha: 1.0)
-        
+        let bgNode = SKSpriteNode(texture: SKTexture(imageNamed: "twinkletwinkle-1"), size: scene.size)
+        bgNode.name = "bg"
+        bgNode.position = center
+        bgNode.zPosition = 0
+        bgNode.run(SKAction(named: "twinkleBG")!)
+        scene.addChild(bgNode)
+            
         pointsLabel = SKLabelNode(text: String(format: "%.6d", score))
         pointsLabel?.horizontalAlignmentMode = .right
         pointsLabel?.verticalAlignmentMode = .center
         
         pointsLabel?.position = CGPoint(x: topRight.x - 16 , y: topRight.y - 80)
+        pointsLabel?.zPosition = 200
         
         scene.addChild(pointsLabel ?? SKLabelNode(text: String(format: "%.6d", 0)))
         
         if let playerComponent = player.component(ofType: WPSpriteComponent.self){
-            let sprite = WPSpriteNode(texture: SKTexture(imageNamed: "idle down-1"), size:CGSize(width: 64.0 , height: 64.0))
+            let sprite = WPSpriteNode(texture: SKTexture(imageNamed: "idle down-1"),color: playerComponent.defaultColor ,size:CGSize(width: 64.0 , height: 64.0))
             sprite.owner = playerComponent
             sprite.position = CGPoint(x: center.x, y: center.y - 32.0)
+            sprite.zPosition = 25
             
             let body = SKPhysicsBody(circleOfRadius: 32.0 )
             body.categoryBitMask = PhysicsCategory.player
@@ -177,6 +188,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
                 let sprite = WPSpriteNode(texture: SKTexture(imageNamed: "heart-1"), size: CGSize(width: 32.0, height: 32.0))
                 sprite.position = CGPoint(x: (topLeft.x + CGFloat(32 * (i+1)) + CGFloat(4 * i)) , y: topLeft.y - 80.0)
                 sprite.name = "Heart\(i)"
+                sprite.zPosition = 200
                 scene.addChild(sprite)
             }
         }
@@ -185,6 +197,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
             let sprite = WPSpriteNode(texture: SKTexture(imageNamed: "magello idle-1"), size:CGSize(width: 166.0 , height: 208.0))
             sprite.owner = enemyComponent
             sprite.position = CGPoint(x: center.x, y: center.y + 256.0)
+            sprite.zPosition = 25
             
             
             let body = SKPhysicsBody(circleOfRadius: 104.0 )
@@ -206,7 +219,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
                     firstMessage.horizontalAlignmentMode = .center
                     firstMessage.verticalAlignmentMode = .center
                     firstMessage.position = CGPoint(x: sprite.position.x, y: sprite.position.y - 128)
-                    firstMessage.zPosition = 50
+                    firstMessage.zPosition = 200
                     scene.addChild(firstMessage)
                 },
                 SKAction.run {
@@ -225,12 +238,25 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
             scene.run(sequence)
         }
         
+        let shieldRing = SKSpriteNode(texture: SKTexture(imageNamed: "UI section-detached"), color: .white, size: CGSize(width: 128.0, height: 128.0))
+        shieldRing.position = player.position
+        shieldRing.zPosition = 30
+        shieldRing.name = "shieldRing"
+        shieldRing.colorBlendFactor = 1.0
+        scene.addChild(shieldRing)
+        
         if let shieldComponent = shield.component(ofType: WPSpriteComponent.self){
-            let sprite = WPSpriteNode(texture: SKTexture(imageNamed: "UI section-detached"), size: CGSize(width: 128.0, height: 128.0))
+            let sprite = WPSpriteNode(texture: SKTexture(imageNamed: "UI section-8"), size: CGSize(width: 128.0, height: 128.0))
             sprite.owner = shieldComponent
-            sprite.position = player.position
-            sprite.physicsBody = sprite.shieldBodyDown()
+            sprite.anchorSprite = player.component(ofType: WPSpriteComponent.self)?.sprite
+            let body = SKPhysicsBody(rectangleOf: CGSize(width: 80.0, height: 32.0))
+            body.categoryBitMask = PhysicsCategory.shield
+            body.contactTestBitMask = PhysicsCategory.projectile
+            body.collisionBitMask = PhysicsCategory.none
+            sprite.physicsBody = body
+            sprite.zPosition = 50
             shieldComponent.sprite = sprite
+            sprite.shieldUp()
             scene.addChild((shieldComponent.sprite)!)
             
         }

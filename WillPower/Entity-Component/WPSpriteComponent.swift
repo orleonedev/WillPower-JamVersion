@@ -15,7 +15,7 @@ class WPSpriteComponent: GKComponent {
     var pulseEffectEnabled: Bool = false {
         didSet {
             if (pulseEffectEnabled) {
-                let grow = SKAction.scale(by: 1.5, duration: 0.5)
+                let grow = SKAction.scale(by: 1.1, duration: 0.2)
                 let sequence = SKAction.sequence([grow, grow.reversed()])
                 
                 sprite?.run(SKAction.repeatForever(sequence), withKey: "pulse")
