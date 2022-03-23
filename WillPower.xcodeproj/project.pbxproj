@@ -8,25 +8,59 @@
 
 /* Begin PBXBuildFile section */
 		516B256627E9CBF60070BC61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B256527E9CBF60070BC61 /* AppDelegate.swift */; };
-		516B256827E9CBF60070BC61 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 516B256727E9CBF60070BC61 /* GameScene.sks */; };
 		516B256A27E9CBF60070BC61 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 516B256927E9CBF60070BC61 /* Actions.sks */; };
-		516B256C27E9CBF60070BC61 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B256B27E9CBF60070BC61 /* GameScene.swift */; };
 		516B256E27E9CBF60070BC61 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B256D27E9CBF60070BC61 /* GameViewController.swift */; };
 		516B257127E9CBF60070BC61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 516B256F27E9CBF60070BC61 /* Main.storyboard */; };
 		516B257327E9CBF80070BC61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 516B257227E9CBF80070BC61 /* Assets.xcassets */; };
 		516B257627E9CBF80070BC61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 516B257427E9CBF80070BC61 /* LaunchScreen.storyboard */; };
+		516B257D27E9CECC0070BC61 /* WPGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B257C27E9CECC0070BC61 /* WPGame.swift */; };
+		516B258027E9D0630070BC61 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 516B257F27E9D0630070BC61 /* GameKit.framework */; };
+		516B258227E9D2830070BC61 /* WPScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B258127E9D2830070BC61 /* WPScene.swift */; };
+		516B258427E9E77B0070BC61 /* WPEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B258327E9E77B0070BC61 /* WPEntity.swift */; };
+		516B258627E9E7FD0070BC61 /* WPHealthComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B258527E9E7FD0070BC61 /* WPHealthComponent.swift */; };
+		516B258827E9EAB70070BC61 /* WPHealthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B258727E9EAB70070BC61 /* WPHealthState.swift */; };
+		516B258A27E9EC1E0070BC61 /* WPDefendState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B258927E9EC1E0070BC61 /* WPDefendState.swift */; };
+		516B258C27E9ECA80070BC61 /* WPHitState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B258B27E9ECA80070BC61 /* WPHitState.swift */; };
+		516B258E27E9ED0E0070BC61 /* WPDefeatedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B258D27E9ED0E0070BC61 /* WPDefeatedState.swift */; };
+		516B259027E9ED1F0070BC61 /* WPInvulnerableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B258F27E9ED1F0070BC61 /* WPInvulnerableState.swift */; };
+		516B259427E9F7FF0070BC61 /* WPSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B259327E9F7FF0070BC61 /* WPSpriteNode.swift */; };
+		516B259627E9F84F0070BC61 /* WPSpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B259527E9F84F0070BC61 /* WPSpriteComponent.swift */; };
+		516B259927EA15090070BC61 /* WPGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B259827EA15090070BC61 /* WPGameState.swift */; };
+		516B259B27EA44B50070BC61 /* WPBaseStreakState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B259A27EA44B50070BC61 /* WPBaseStreakState.swift */; };
+		516B259D27EA45890070BC61 /* WP2XStreakState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B259C27EA45890070BC61 /* WP2XStreakState.swift */; };
+		516B259F27EA45BD0070BC61 /* WP3XStreakState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B259E27EA45BD0070BC61 /* WP3XStreakState.swift */; };
+		516B25A127EA45EA0070BC61 /* WP4XStreakState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B25A027EA45EA0070BC61 /* WP4XStreakState.swift */; };
+		516B25A327EA460F0070BC61 /* WPGameOverState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B25A227EA460F0070BC61 /* WPGameOverState.swift */; };
+		516B25A527EA91AA0070BC61 /* WPAttackComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B25A427EA91AA0070BC61 /* WPAttackComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		516B256227E9CBF60070BC61 /* WillPower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WillPower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		516B256527E9CBF60070BC61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		516B256727E9CBF60070BC61 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		516B256927E9CBF60070BC61 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		516B256B27E9CBF60070BC61 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		516B256D27E9CBF60070BC61 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		516B257027E9CBF60070BC61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		516B257227E9CBF80070BC61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		516B257527E9CBF80070BC61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		516B257C27E9CECC0070BC61 /* WPGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPGame.swift; sourceTree = "<group>"; };
+		516B257F27E9D0630070BC61 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		516B258127E9D2830070BC61 /* WPScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPScene.swift; sourceTree = "<group>"; };
+		516B258327E9E77B0070BC61 /* WPEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPEntity.swift; sourceTree = "<group>"; };
+		516B258527E9E7FD0070BC61 /* WPHealthComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPHealthComponent.swift; sourceTree = "<group>"; };
+		516B258727E9EAB70070BC61 /* WPHealthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPHealthState.swift; sourceTree = "<group>"; };
+		516B258927E9EC1E0070BC61 /* WPDefendState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPDefendState.swift; sourceTree = "<group>"; };
+		516B258B27E9ECA80070BC61 /* WPHitState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPHitState.swift; sourceTree = "<group>"; };
+		516B258D27E9ED0E0070BC61 /* WPDefeatedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPDefeatedState.swift; sourceTree = "<group>"; };
+		516B258F27E9ED1F0070BC61 /* WPInvulnerableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPInvulnerableState.swift; sourceTree = "<group>"; };
+		516B259327E9F7FF0070BC61 /* WPSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPSpriteNode.swift; sourceTree = "<group>"; };
+		516B259527E9F84F0070BC61 /* WPSpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPSpriteComponent.swift; sourceTree = "<group>"; };
+		516B259827EA15090070BC61 /* WPGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPGameState.swift; sourceTree = "<group>"; };
+		516B259A27EA44B50070BC61 /* WPBaseStreakState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPBaseStreakState.swift; sourceTree = "<group>"; };
+		516B259C27EA45890070BC61 /* WP2XStreakState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WP2XStreakState.swift; sourceTree = "<group>"; };
+		516B259E27EA45BD0070BC61 /* WP3XStreakState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WP3XStreakState.swift; sourceTree = "<group>"; };
+		516B25A027EA45EA0070BC61 /* WP4XStreakState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WP4XStreakState.swift; sourceTree = "<group>"; };
+		516B25A227EA460F0070BC61 /* WPGameOverState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPGameOverState.swift; sourceTree = "<group>"; };
+		516B25A427EA91AA0070BC61 /* WPAttackComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPAttackComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				516B258027E9D0630070BC61 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +80,7 @@
 			children = (
 				516B256427E9CBF60070BC61 /* WillPower */,
 				516B256327E9CBF60070BC61 /* Products */,
+				516B257E27E9D0630070BC61 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,16 +95,64 @@
 		516B256427E9CBF60070BC61 /* WillPower */ = {
 			isa = PBXGroup;
 			children = (
+				516B259727EA14F70070BC61 /* GameStates */,
+				516B259127E9F79E0070BC61 /* Entity-Component */,
 				516B256527E9CBF60070BC61 /* AppDelegate.swift */,
-				516B256727E9CBF60070BC61 /* GameScene.sks */,
 				516B256927E9CBF60070BC61 /* Actions.sks */,
-				516B256B27E9CBF60070BC61 /* GameScene.swift */,
 				516B256D27E9CBF60070BC61 /* GameViewController.swift */,
 				516B256F27E9CBF60070BC61 /* Main.storyboard */,
 				516B257227E9CBF80070BC61 /* Assets.xcassets */,
 				516B257427E9CBF80070BC61 /* LaunchScreen.storyboard */,
+				516B257C27E9CECC0070BC61 /* WPGame.swift */,
+				516B258127E9D2830070BC61 /* WPScene.swift */,
+				516B259327E9F7FF0070BC61 /* WPSpriteNode.swift */,
 			);
 			path = WillPower;
+			sourceTree = "<group>";
+		};
+		516B257E27E9D0630070BC61 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				516B257F27E9D0630070BC61 /* GameKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		516B259127E9F79E0070BC61 /* Entity-Component */ = {
+			isa = PBXGroup;
+			children = (
+				516B259227E9F7BE0070BC61 /* HealthStates */,
+				516B258327E9E77B0070BC61 /* WPEntity.swift */,
+				516B258527E9E7FD0070BC61 /* WPHealthComponent.swift */,
+				516B259527E9F84F0070BC61 /* WPSpriteComponent.swift */,
+				516B25A427EA91AA0070BC61 /* WPAttackComponent.swift */,
+			);
+			path = "Entity-Component";
+			sourceTree = "<group>";
+		};
+		516B259227E9F7BE0070BC61 /* HealthStates */ = {
+			isa = PBXGroup;
+			children = (
+				516B258727E9EAB70070BC61 /* WPHealthState.swift */,
+				516B258927E9EC1E0070BC61 /* WPDefendState.swift */,
+				516B258B27E9ECA80070BC61 /* WPHitState.swift */,
+				516B258D27E9ED0E0070BC61 /* WPDefeatedState.swift */,
+				516B258F27E9ED1F0070BC61 /* WPInvulnerableState.swift */,
+			);
+			path = HealthStates;
+			sourceTree = "<group>";
+		};
+		516B259727EA14F70070BC61 /* GameStates */ = {
+			isa = PBXGroup;
+			children = (
+				516B259827EA15090070BC61 /* WPGameState.swift */,
+				516B259A27EA44B50070BC61 /* WPBaseStreakState.swift */,
+				516B259C27EA45890070BC61 /* WP2XStreakState.swift */,
+				516B259E27EA45BD0070BC61 /* WP3XStreakState.swift */,
+				516B25A027EA45EA0070BC61 /* WP4XStreakState.swift */,
+				516B25A227EA460F0070BC61 /* WPGameOverState.swift */,
+			);
+			path = GameStates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,7 +214,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				516B257127E9CBF60070BC61 /* Main.storyboard in Resources */,
-				516B256827E9CBF60070BC61 /* GameScene.sks in Resources */,
 				516B257327E9CBF80070BC61 /* Assets.xcassets in Resources */,
 				516B257627E9CBF80070BC61 /* LaunchScreen.storyboard in Resources */,
 				516B256A27E9CBF60070BC61 /* Actions.sks in Resources */,
@@ -144,8 +227,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				516B256C27E9CBF60070BC61 /* GameScene.swift in Sources */,
+				516B258C27E9ECA80070BC61 /* WPHitState.swift in Sources */,
+				516B259427E9F7FF0070BC61 /* WPSpriteNode.swift in Sources */,
+				516B25A327EA460F0070BC61 /* WPGameOverState.swift in Sources */,
+				516B258227E9D2830070BC61 /* WPScene.swift in Sources */,
+				516B259027E9ED1F0070BC61 /* WPInvulnerableState.swift in Sources */,
+				516B259627E9F84F0070BC61 /* WPSpriteComponent.swift in Sources */,
 				516B256E27E9CBF60070BC61 /* GameViewController.swift in Sources */,
+				516B25A127EA45EA0070BC61 /* WP4XStreakState.swift in Sources */,
+				516B25A527EA91AA0070BC61 /* WPAttackComponent.swift in Sources */,
+				516B258627E9E7FD0070BC61 /* WPHealthComponent.swift in Sources */,
+				516B259927EA15090070BC61 /* WPGameState.swift in Sources */,
+				516B259F27EA45BD0070BC61 /* WP3XStreakState.swift in Sources */,
+				516B257D27E9CECC0070BC61 /* WPGame.swift in Sources */,
+				516B258A27E9EC1E0070BC61 /* WPDefendState.swift in Sources */,
+				516B258427E9E77B0070BC61 /* WPEntity.swift in Sources */,
+				516B258827E9EAB70070BC61 /* WPHealthState.swift in Sources */,
+				516B259D27EA45890070BC61 /* WP2XStreakState.swift in Sources */,
+				516B258E27E9ED0E0070BC61 /* WPDefeatedState.swift in Sources */,
+				516B259B27EA44B50070BC61 /* WPBaseStreakState.swift in Sources */,
 				516B256627E9CBF60070BC61 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,7 +322,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -276,7 +376,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -299,8 +399,10 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -327,8 +429,10 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
