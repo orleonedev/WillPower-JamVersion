@@ -182,7 +182,8 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
         
         
         pointsLabel = SKLabelNode(text: String(format: "%.6d", score))
-        pointsLabel?.fontName = "VT323-Regular.ttf"
+        pointsLabel?.fontName = "VT323-Regular"
+        pointsLabel?.fontSize = 48
         pointsLabel?.horizontalAlignmentMode = .right
         pointsLabel?.verticalAlignmentMode = .center
         
@@ -249,22 +250,24 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
                 SKAction.run {
                     let firstMessage = SKLabelNode(text: "Are you ready to die?")
                     firstMessage.name = "firstMessage"
-                    firstMessage.fontName = "VT323-Regular.ttf"
+                    firstMessage.fontName = "VT323-Regular"
+                    firstMessage.fontSize = 42.0
                     firstMessage.horizontalAlignmentMode = .center
                     firstMessage.verticalAlignmentMode = .center
-                    firstMessage.position = CGPoint(x: sprite.position.x, y: sprite.position.y - 128)
+                    firstMessage.position = CGPoint(x: sprite.position.x, y: sprite.position.y - 128 - 32)
                     firstMessage.zPosition = 200
                     scene.addChild(firstMessage)
                     
-                    let secondMessage = SKLabelNode(text: "Swipe to move shield direction")
-                    secondMessage.fontName = "VT323-Regular.ttf"
+                    let secondMessage = SKLabelNode(text: "  Swipe to move shield direction")
+                    secondMessage.fontName = "VT323-Regular"
+                    secondMessage.fontSize = 48.0
                     secondMessage.name = "secondMessage"
                     secondMessage.horizontalAlignmentMode = .center
                     secondMessage.verticalAlignmentMode = .center
                     secondMessage.numberOfLines = 2
-                    secondMessage.preferredMaxLayoutWidth = 256
+                    secondMessage.preferredMaxLayoutWidth = 320
                     
-                    secondMessage.position = CGPoint(x: self.center.x, y: self.center.y - 148)
+                    secondMessage.position = CGPoint(x: self.center.x, y: self.center.y - 148 - 32)
                     secondMessage.zPosition = 200
                     scene.addChild(secondMessage)
                     

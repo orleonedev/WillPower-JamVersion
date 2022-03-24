@@ -33,8 +33,8 @@ class WPGameOverState: WPGameState {
             block.zPosition = 525
             
             let finalScore = SKLabelNode(text: String(format: "%.6d", game!.score))
-            finalScore.fontName = "VT323-Regular.ttf"
-            finalScore.fontSize = 64
+            finalScore.fontName = "VT323-Regular"
+            finalScore.fontSize = 64 + 16
             finalScore.name = "finalscore"
             finalScore.position = CGPoint(x: game!.center.x, y: game!.center.y + 64 + 32)
             finalScore.zPosition = 550
