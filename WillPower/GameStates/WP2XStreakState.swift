@@ -17,10 +17,10 @@ class WP2XStreakState: WPGameState {
         print("2x Streak Good Job!")
         let label = SKLabelNode(text: "Good Job!")
         label.fontName = "VT323-Regular"
-        label.fontSize = 48.0
+        label.fontSize = 42.0
         label.horizontalAlignmentMode = .right
         label.verticalAlignmentMode = .center
-        label.position = CGPoint(x: (game?.pointsLabel?.position.x)! , y: (game?.pointsLabel?.position.y)! - 72)
+        label.position = CGPoint(x: (game?.pointsLabel?.position.x)! , y: (game?.pointsLabel?.position.y)! - 256 - 32 - 8)
         label.zPosition = 200
         label.alpha = 0
         game?.scene.addChild(label)
