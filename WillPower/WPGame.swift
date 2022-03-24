@@ -33,9 +33,8 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     var random: GKGaussianDistribution
     var LevelStateMachine: GKStateMachine?
     var ignoreContacts: Bool = false
+    let audioInstance = SKTAudio.sharedInstance()
     
-    
-    //    var level: WPLevel
     var enemy: WPEntity
     var player: WPEntity
     var shield: WPEntity
@@ -169,6 +168,8 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
         swipeDownRecog.addTarget(self, action: #selector(WPGame.swipedDown))
         swipeDownRecog.direction = .down
         view.addGestureRecognizer(swipeDownRecog)
+        
+        audioInstance.playBackgroundMusic("magello2.mp3")
         
         
         scene.backgroundColor = SKColor.init(hue: 150.0/255.0, saturation: 0.8, brightness: 0.1, alpha: 1.0)
@@ -386,7 +387,8 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     @objc func swipedRight(){
         
         print("Swiped Right")
-        
+        audioInstance.playSoundEffect("swosh.mp3")
+        //audioInstance.soundEffectPlayer?.setVolume(0.1, fadeDuration: 0.1)
         if let shield = self.shield.component(ofType: WPSpriteComponent.self){
             shield.sprite?.shieldRight()
           
@@ -396,7 +398,8 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     @objc func swipedLeft(){
         
         print("Swiped Left")
-        
+        audioInstance.playSoundEffect("swosh.mp3")
+       // audioInstance.soundEffectPlayer?.setVolume(0.1, fadeDuration: 0.1)
         if let shield = self.shield.component(ofType: WPSpriteComponent.self){
             shield.sprite?.shieldLeft()
            
@@ -406,7 +409,8 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     @objc func swipedUp(){
        
         print("Swiped Up")
-        
+        audioInstance.playSoundEffect("swosh.mp3")
+        //audioInstance.soundEffectPlayer?.setVolume(0.1, fadeDuration: 0.1)
         if let shield = self.shield.component(ofType: WPSpriteComponent.self){
             shield.sprite?.shieldUp()
           
@@ -417,7 +421,8 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     @objc func swipedDown(){
         
         print("Swiped Down")
-        
+        audioInstance.playSoundEffect("swosh.mp3")
+        //audioInstance.soundEffectPlayer?.setVolume(0.1, fadeDuration: 0.1)
         if let shield = self.shield.component(ofType: WPSpriteComponent.self){
             shield.sprite?.shieldDown()
             

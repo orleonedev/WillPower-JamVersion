@@ -53,7 +53,7 @@ class WPAttackComponent: GKComponent {
             }
             
             remainingTime = timeSpan * TimeInterval( 1.0 / (Double(game.random.nextInt(upperBound: Int(frequencyRange.upperLimit))) + 1.0))
-            print(remainingTime)
+            
             
         }
             

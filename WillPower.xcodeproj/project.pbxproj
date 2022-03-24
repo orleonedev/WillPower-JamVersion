@@ -33,6 +33,9 @@
 		516B25A327EA460F0070BC61 /* WPGameOverState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B25A227EA460F0070BC61 /* WPGameOverState.swift */; };
 		516B25A527EA91AA0070BC61 /* WPAttackComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B25A427EA91AA0070BC61 /* WPAttackComponent.swift */; };
 		51ECA6FC27ECCDDC00F2EAAD /* VT323-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 51ECA6FB27ECCDDC00F2EAAD /* VT323-Regular.ttf */; };
+		51ECA70027ED26E500F2EAAD /* magello2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 51ECA6FF27ED26E500F2EAAD /* magello2.mp3 */; };
+		51ECA70227ED271000F2EAAD /* SKTAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ECA70127ED271000F2EAAD /* SKTAudio.swift */; };
+		51ECA70427ED2CF900F2EAAD /* swosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 51ECA70327ED2CF900F2EAAD /* swosh.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		516B25A427EA91AA0070BC61 /* WPAttackComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPAttackComponent.swift; sourceTree = "<group>"; };
 		51ECA6FB27ECCDDC00F2EAAD /* VT323-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VT323-Regular.ttf"; sourceTree = "<group>"; };
 		51ECA6FD27ECCE0800F2EAAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51ECA6FF27ED26E500F2EAAD /* magello2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = magello2.mp3; sourceTree = "<group>"; };
+		51ECA70127ED271000F2EAAD /* SKTAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKTAudio.swift; sourceTree = "<group>"; };
+		51ECA70327ED2CF900F2EAAD /* swosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swosh.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,7 @@
 		516B256427E9CBF60070BC61 /* WillPower */ = {
 			isa = PBXGroup;
 			children = (
+				51ECA6FE27ED26B800F2EAAD /* Audio */,
 				51ECA6FD27ECCE0800F2EAAD /* Info.plist */,
 				51ECA6FA27ECCDC100F2EAAD /* Font */,
 				516B259727EA14F70070BC61 /* GameStates */,
@@ -111,6 +118,7 @@
 				516B257C27E9CECC0070BC61 /* WPGame.swift */,
 				516B258127E9D2830070BC61 /* WPScene.swift */,
 				516B259327E9F7FF0070BC61 /* WPSpriteNode.swift */,
+				51ECA70127ED271000F2EAAD /* SKTAudio.swift */,
 			);
 			path = WillPower;
 			sourceTree = "<group>";
@@ -166,6 +174,15 @@
 				51ECA6FB27ECCDDC00F2EAAD /* VT323-Regular.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		51ECA6FE27ED26B800F2EAAD /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				51ECA70327ED2CF900F2EAAD /* swosh.mp3 */,
+				51ECA6FF27ED26E500F2EAAD /* magello2.mp3 */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,7 +244,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				516B257127E9CBF60070BC61 /* Main.storyboard in Resources */,
+				51ECA70027ED26E500F2EAAD /* magello2.mp3 in Resources */,
 				516B257327E9CBF80070BC61 /* Assets.xcassets in Resources */,
+				51ECA70427ED2CF900F2EAAD /* swosh.mp3 in Resources */,
 				51ECA6FC27ECCDDC00F2EAAD /* VT323-Regular.ttf in Resources */,
 				516B257627E9CBF80070BC61 /* LaunchScreen.storyboard in Resources */,
 				516B256A27E9CBF60070BC61 /* Actions.sks in Resources */,
@@ -259,6 +278,7 @@
 				516B258827E9EAB70070BC61 /* WPHealthState.swift in Sources */,
 				516B259D27EA45890070BC61 /* WP2XStreakState.swift in Sources */,
 				516B258E27E9ED0E0070BC61 /* WPDefeatedState.swift in Sources */,
+				51ECA70227ED271000F2EAAD /* SKTAudio.swift in Sources */,
 				516B259B27EA44B50070BC61 /* WPBaseStreakState.swift in Sources */,
 				516B256627E9CBF60070BC61 /* AppDelegate.swift in Sources */,
 			);
