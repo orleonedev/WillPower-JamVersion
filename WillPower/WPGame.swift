@@ -24,6 +24,11 @@ struct PhysicsCategory {
 
 class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     
+    let swipeRightRecog = UISwipeGestureRecognizer()
+    let swipeLeftRecog = UISwipeGestureRecognizer()
+    let swipeUpRecog = UISwipeGestureRecognizer()
+    let swipeDownRecog = UISwipeGestureRecognizer()
+    
     private var _scene: WPScene?
     var random: GKGaussianDistribution
     var LevelStateMachine: GKStateMachine?
@@ -148,6 +153,24 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     }
     
     func didMoveToView(scene: WPScene, view: SKView) {
+        
+        swipeRightRecog.addTarget(self, action: #selector(WPGame.swipedRight))
+        swipeRightRecog.direction = .right
+        view.addGestureRecognizer(swipeRightRecog)
+        
+        swipeLeftRecog.addTarget(self, action: #selector(WPGame.swipedLeft))
+        swipeLeftRecog.direction = .left
+        view.addGestureRecognizer(swipeLeftRecog)
+        
+        swipeUpRecog.addTarget(self, action: #selector(WPGame.swipedUp))
+        swipeUpRecog.direction = .up
+        view.addGestureRecognizer(swipeUpRecog)
+        
+        swipeDownRecog.addTarget(self, action: #selector(WPGame.swipedDown))
+        swipeDownRecog.direction = .down
+        view.addGestureRecognizer(swipeDownRecog)
+        
+        
         scene.backgroundColor = SKColor.init(hue: 150.0/255.0, saturation: 0.8, brightness: 0.1, alpha: 1.0)
         let bgNode = SKSpriteNode(texture: SKTexture(imageNamed: "twinkletwinkle-1"), size: scene.size)
         bgNode.name = "bg"
@@ -155,15 +178,24 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
         bgNode.zPosition = 0
         bgNode.run(SKAction(named: "twinkleBG")!)
         scene.addChild(bgNode)
-            
+        
+        
+        
         pointsLabel = SKLabelNode(text: String(format: "%.6d", score))
         pointsLabel?.horizontalAlignmentMode = .right
         pointsLabel?.verticalAlignmentMode = .center
         
-        pointsLabel?.position = CGPoint(x: topRight.x - 16 , y: topRight.y - 80)
+        pointsLabel?.position = CGPoint(x: topRight.x - 18 , y: topRight.y - 80)
         pointsLabel?.zPosition = 200
         
         scene.addChild(pointsLabel ?? SKLabelNode(text: String(format: "%.6d", 0)))
+        
+        let pointsBox = SKSpriteNode(texture: SKTexture(imageNamed: "uilight-1"), color: SKColor.black, size: CGSize(width: pointsLabel!.frame.width + 20 , height: pointsLabel!.frame.height + 20 ))
+        pointsBox.anchorPoint = CGPoint(x: 1.0, y: 0.5)
+        pointsBox.position = CGPoint(x: pointsLabel!.position.x + 10 , y: pointsLabel!.position.y)
+        pointsBox.zPosition = 190
+        scene.addChild(pointsBox)
+
         
         if let playerComponent = player.component(ofType: WPSpriteComponent.self){
             let sprite = WPSpriteNode(texture: SKTexture(imageNamed: "idle down-1"),color: playerComponent.defaultColor ,size:CGSize(width: 64.0 , height: 64.0))
@@ -329,6 +361,49 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     func resetCounter(){
         blockCounter = 0
     }
+    
+    @objc func swipedRight(){
+        
+        print("Swiped Right")
+        
+        if let shield = self.shield.component(ofType: WPSpriteComponent.self){
+            shield.sprite?.shieldRight()
+          
+        }
+    }
+    
+    @objc func swipedLeft(){
+        
+        print("Swiped Left")
+        
+        if let shield = self.shield.component(ofType: WPSpriteComponent.self){
+            shield.sprite?.shieldLeft()
+           
+        }
+    }
+    
+    @objc func swipedUp(){
+       
+        print("Swiped Up")
+        
+        if let shield = self.shield.component(ofType: WPSpriteComponent.self){
+            shield.sprite?.shieldUp()
+          
+        }
+        
+    }
+    
+    @objc func swipedDown(){
+        
+        print("Swiped Down")
+        
+        if let shield = self.shield.component(ofType: WPSpriteComponent.self){
+            shield.sprite?.shieldDown()
+            
+        }
+        
+    }
+    
     
 }
 

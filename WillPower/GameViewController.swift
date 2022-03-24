@@ -12,28 +12,8 @@ import GameplayKit
 class GameViewController: UIViewController {
     
     var game: WPGame?
-    
-    let swipeRightRecog = UISwipeGestureRecognizer()
-    let swipeLeftRecog = UISwipeGestureRecognizer()
-    let swipeUpRecog = UISwipeGestureRecognizer()
-    let swipeDownRecog = UISwipeGestureRecognizer()
 
     override func viewDidLoad() {
-        swipeRightRecog.addTarget(self, action: #selector(self.swipedRight))
-        swipeRightRecog.direction = .right
-        self.view?.addGestureRecognizer(swipeRightRecog)
-        
-        swipeLeftRecog.addTarget(self, action: #selector(self.swipedLeft))
-        swipeLeftRecog.direction = .left
-        self.view?.addGestureRecognizer(swipeLeftRecog)
-        
-        swipeUpRecog.addTarget(self, action: #selector(self.swipedUp))
-        swipeUpRecog.direction = .up
-        self.view?.addGestureRecognizer(swipeUpRecog)
-        
-        swipeDownRecog.addTarget(self, action: #selector(self.swipedDown))
-        swipeDownRecog.direction = .down
-        self.view?.addGestureRecognizer(swipeDownRecog)
         
         super.viewDidLoad()
         
@@ -47,8 +27,8 @@ class GameViewController: UIViewController {
                 view.presentScene(scene)
                 view.ignoresSiblingOrder = true
                 view.showsPhysics = false
-                view.showsFPS = true
-                view.showsNodeCount = true
+                view.showsFPS = false
+                view.showsNodeCount = false
             }
         }
         
@@ -70,46 +50,5 @@ class GameViewController: UIViewController {
         return true
     }
     
-    @objc func swipedRight(){
-        
-        print("Swiped Right")
-        
-        if let shield = game?.shield.component(ofType: WPSpriteComponent.self){
-            shield.sprite?.shieldRight()
-          //  shield.sprite?.physicsBody = shield.sprite?.shieldBodyRight()
-        }
-    }
-    
-    @objc func swipedLeft(){
-        
-        print("Swiped Left")
-        
-        if let shield = game?.shield.component(ofType: WPSpriteComponent.self){
-            shield.sprite?.shieldLeft()
-           // shield.sprite?.physicsBody = shield.sprite?.shieldBodyLeft()
-        }
-    }
-    
-    @objc func swipedUp(){
-       
-        print("Swiped Up")
-        
-        if let shield = game?.shield.component(ofType: WPSpriteComponent.self){
-            shield.sprite?.shieldUp()
-          //  shield.sprite?.physicsBody = shield.sprite?.shieldBodyUp()
-        }
-        
-    }
-    
-    @objc func swipedDown(){
-        
-        print("Swiped Down")
-        
-        if let shield = game?.shield.component(ofType: WPSpriteComponent.self){
-            shield.sprite?.shieldDown()
-            //shield.sprite?.physicsBody = shield.sprite?.shieldBodyDown()
-        }
-        
-    }
     
 }

@@ -16,6 +16,14 @@ class WPHitState: WPHealthState {
     override func didEnter(from previousState: GKState?) {
         print("HitState")
         if let component = entity.component(ofType: WPHealthComponent.self) {
+            
+            if let spriteComponent = entity.component(ofType: WPSpriteComponent.self){
+                spriteComponent.pulseEffectEnabled = true
+                spriteComponent.sprite?.colorBlendFactor = 0.8
+                game?.ignoreContacts = true
+                
+            }
+            
             component.heartCounter -= 1
             print("** remaining Heart: \(component.heartCounter)")
             if component.heartCounter <= 0 {

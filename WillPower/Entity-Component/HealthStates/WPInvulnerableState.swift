@@ -18,12 +18,7 @@ class WPInvulnerableState: WPHealthState {
         print("invulnerable state")
         duration = 2.0
         
-        if let spriteComponent = entity.component(ofType: WPSpriteComponent.self){
-            spriteComponent.pulseEffectEnabled = true
-            spriteComponent.sprite?.colorBlendFactor = 0.8
-            game?.ignoreContacts = true
-            
-        }
+        
     }
     
     override func willExit(to nextState: GKState) {

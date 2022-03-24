@@ -15,6 +15,14 @@ class WPDefeatedState: WPHealthState {
     
     override func didEnter(from previousState: GKState?) {
         print("Defeated State")
-        game?.LevelStateMachine?.enter(WPGameOverState.self)
+        if let spriteComponent = entity.component(ofType: WPSpriteComponent.self){
+            spriteComponent.pulseEffectEnabled = false
+            spriteComponent.sprite?.colorBlendFactor = 0.0
+            spriteComponent.sprite?.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.5),      SKAction.run {
+                self.game?.LevelStateMachine?.enter(WPGameOverState.self)
+            }]))
+            
+        }
+        
     }
 }

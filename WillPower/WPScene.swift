@@ -28,4 +28,21 @@ class WPScene: SKScene {
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let firstT = touches.first{
+            let location = firstT.location(in: self)
+        let nodeAtPoint = atPoint(location)
+        if let touchedNode = nodeAtPoint as? SKSpriteNode{
+            if touchedNode.name == "retry" {
+                let newGame = WPGame()
+                let scene = newGame.scene
+                scene.size = (self.view?.frame.size)!
+                scene.scaleMode = .aspectFit
+                view?.presentScene(scene, transition: .fade(withDuration: 2.0))
+                
+
+                }
+            }
+        }
+    }
 }
