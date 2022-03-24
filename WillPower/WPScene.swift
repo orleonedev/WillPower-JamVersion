@@ -38,7 +38,7 @@ class WPScene: SKScene {
                 let scene = newGame.scene
                 scene.size = (self.view?.frame.size)!
                 scene.scaleMode = .aspectFit
-                view?.presentScene(scene, transition: .fade(withDuration: 2.0))
+                view?.presentScene(scene, transition: .fade(withDuration: 1.0))
                 
 
                 }

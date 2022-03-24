@@ -253,10 +253,24 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
                     firstMessage.position = CGPoint(x: sprite.position.x, y: sprite.position.y - 128)
                     firstMessage.zPosition = 200
                     scene.addChild(firstMessage)
+                    
+                    let secondMessage = SKLabelNode(text: "Swipe to move shield direction")
+                    secondMessage.name = "secondMessage"
+                    secondMessage.horizontalAlignmentMode = .center
+                    secondMessage.verticalAlignmentMode = .center
+                    secondMessage.numberOfLines = 2
+                    secondMessage.preferredMaxLayoutWidth = 256
+                    secondMessage.position = CGPoint(x: self.center.x, y: self.center.y - 148)
+                    secondMessage.zPosition = 200
+                    scene.addChild(secondMessage)
+                    
                 },
                 SKAction.run {
                     if let mess = scene.childNode(withName: "firstMessage") as? SKLabelNode {
-                        mess.run(SKAction.fadeOut(withDuration: 3.0))
+                        mess.run(SKAction.fadeOut(withDuration: 4.0))
+                    }
+                    if let mess2 = scene.childNode(withName: "secondMessage") as? SKLabelNode {
+                        mess2.run(SKAction.fadeOut(withDuration: 4.0))
                     }
                     
                 },
