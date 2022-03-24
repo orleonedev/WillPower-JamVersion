@@ -16,6 +16,7 @@ class WP2XStreakState: WPGameState {
     override func didEnter(from previousState: GKState?) {
         print("2x Streak Good Job!")
         let label = SKLabelNode(text: "Good Job!")
+        label.fontName = "VT323-Regular.ttf"
         label.horizontalAlignmentMode = .right
         label.verticalAlignmentMode = .center
         label.position = CGPoint(x: (game?.pointsLabel?.position.x)! , y: (game?.pointsLabel?.position.y)! - 72)

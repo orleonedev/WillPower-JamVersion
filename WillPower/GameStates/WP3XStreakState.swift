@@ -16,6 +16,7 @@ class WP3XStreakState: WPGameState {
     override func didEnter(from previousState: GKState?) {
         print("3x Streak wow man Sfizioso")
         let label = SKLabelNode(text: "Sfizioso!")
+        label.fontName = "VT323-Regular.ttf"
         label.horizontalAlignmentMode = .right
         label.verticalAlignmentMode = .center
         label.position = CGPoint(x: (game?.pointsLabel?.position.x)! , y: (game?.pointsLabel?.position.y)! - 72)
