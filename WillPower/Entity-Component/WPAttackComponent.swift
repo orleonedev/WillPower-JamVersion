@@ -9,6 +9,9 @@ import GameplayKit
 
 class WPAttackComponent: GKComponent {
     
+    var secondRandom: GKGaussianDistribution
+    var seed: GKRandomSource = GKRandomSource()
+    var divider: Double = 1.0
     var randomDir: GKRandomDistribution
     var target: WPEntity
     var game: WPGame
@@ -27,6 +30,7 @@ class WPAttackComponent: GKComponent {
         self.target = target
         self.attacker = attacker
         randomDir = GKRandomDistribution(forDieWithSideCount: 4)
+        secondRandom = GKGaussianDistribution()
         super.init()
     }
     
@@ -51,8 +55,12 @@ class WPAttackComponent: GKComponent {
             default:
                 shoot(from: .Up)
             }
-            
-            remainingTime = timeSpan * TimeInterval( 1.0 / (Double(game.random.nextInt(upperBound: Int(frequencyRange.upperLimit))) + 1.0))
+                secondRandom = GKGaussianDistribution(randomSource: seed , lowestValue: 1*game.multiplyer/2, highestValue: 2*game.multiplyer - (game.multiplyer/2))
+                divider = Double(secondRandom.nextInt())
+                print("seed: \(divider)")
+                remainingTime = timeSpan * TimeInterval(1.0 / (divider + 1.0)) + 0.15
+                print(remainingTime)
+//            remainingTime = timeSpan * TimeInterval( 1.0 / (Double(game.random.nextInt(upperBound: Int(frequencyRange.upperLimit))) + 1.0))
             
             
         }
@@ -64,33 +72,53 @@ class WPAttackComponent: GKComponent {
     
     func shoot(from: Directions) {
         
+        let offset = randomOffset()
         let projectile = WPSpriteNode(texture: SKTexture(imageNamed: "comet moving-1"), size: CGSize(width: 48.0, height: 48.0))
-        switch from {
-        case .Up:
-            projectile.position = CGPoint(x: game.player.position.x, y: game.player.position.y + 168)
-            projectile.zRotation = 89.55
-        case .Right:
-            projectile.position = CGPoint(x: game.player.position.x + 168, y: game.player.position.y )
-            projectile.zRotation = 0
-        case .Down:
-            projectile.position = CGPoint(x: game.player.position.x, y: game.player.position.y - 168)
-            projectile.zRotation = -89.55
-        case .Left:
-            projectile.position = CGPoint(x: game.player.position.x - 168, y: game.player.position.y)
-            projectile.zRotation = 179.1
-        }
         projectile.zPosition = 50
         let body = SKPhysicsBody(circleOfRadius: 16.0 )
         body.categoryBitMask = PhysicsCategory.projectile
         body.contactTestBitMask = PhysicsCategory.player + PhysicsCategory.shield
         body.collisionBitMask = PhysicsCategory.none
-        
         projectile.physicsBody = body
-        game.scene.addChild(projectile)
         projectile.run(SKAction(named: "cometMoving")!)
-        projectile.run(SKAction.move(to: target.position, duration: 1.0))
+        switch from {
+        case .Up:
+            projectile.position = CGPoint(x: game.player.position.x + offset, y: game.player.position.y + 168)
+            projectile.zRotation = 89.55
+            projectile.run(SKAction.moveTo(y: target.position.y, duration: 1.0))
+        case .Right:
+            projectile.position = CGPoint(x: game.player.position.x + 168, y: game.player.position.y + offset )
+            projectile.zRotation = 0
+            projectile.run(SKAction.moveTo(x: target.position.x, duration: 1.0))
+        case .Down:
+            projectile.position = CGPoint(x: game.player.position.x + offset, y: game.player.position.y - 168)
+            projectile.zRotation = -89.55
+            projectile.run(SKAction.moveTo(y: target.position.y, duration: 1.0))
+        case .Left:
+            projectile.position = CGPoint(x: game.player.position.x - 168, y: game.player.position.y + offset)
+            projectile.zRotation = 179.1
+            projectile.run(SKAction.moveTo(x: target.position.x, duration: 1.0))
+        }
+        
+        game.scene.addChild(projectile)
         
         
+        
+    }
+    
+    func randomOffset()-> CGFloat{
+        let distribution = GKGaussianDistribution(forDieWithSideCount: 6)
+        var offset: CGFloat
+        switch distribution.nextInt(){
+        case 1,5:
+            offset = -20.0
+        case 2,6:
+            offset = 20.0
+        default:
+            offset = 0.0
+        }
+        
+        return offset
         
     }
 }

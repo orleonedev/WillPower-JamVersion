@@ -18,9 +18,9 @@ class WP4XStreakState: WPGameState {
         let label = SKLabelNode(text: "YOU'RE ON FIRE!")
         label.fontName = "VT323-Regular"
         label.fontSize = 42.0
-        label.horizontalAlignmentMode = .right
+        label.horizontalAlignmentMode = .left
         label.verticalAlignmentMode = .center
-        label.position = CGPoint(x: (game?.pointsLabel?.position.x)! , y: (game?.pointsLabel?.position.y)! - 256 - 32 - 8)
+        label.position = CGPoint(x: (game?.pointsLabel?.position.x)! , y: (game?.pointsLabel?.position.y)! - 256 - 32 )
         label.zPosition = 200
         label.alpha = 0
         game?.scene.addChild(label)

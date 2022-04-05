@@ -39,6 +39,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     var player: WPEntity
     var shield: WPEntity
     var pointsLabel: SKLabelNode?
+    var retryButton: SKSpriteNode?
     
     var score: Int = 0 {
         willSet {
@@ -185,19 +186,34 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
         pointsLabel = SKLabelNode(text: String(format: "%.6d", score))
         pointsLabel?.fontName = "VT323-Regular"
         pointsLabel?.fontSize = 48
-        pointsLabel?.horizontalAlignmentMode = .right
-        pointsLabel?.verticalAlignmentMode = .center
+        pointsLabel?.horizontalAlignmentMode = .left
+        pointsLabel?.verticalAlignmentMode = .top
         
-        pointsLabel?.position = CGPoint(x: topRight.x - 18 , y: topRight.y - 80)
+        pointsLabel?.position = CGPoint(x: topLeft.x + 18 , y: topLeft.y - 64)
         pointsLabel?.zPosition = 200
         
         scene.addChild(pointsLabel ?? SKLabelNode(text: String(format: "%.6d", 0)))
         
         let pointsBox = SKSpriteNode(texture: SKTexture(imageNamed: "uilight-1"), color: SKColor.black, size: CGSize(width: pointsLabel!.frame.width + 20 , height: pointsLabel!.frame.height + 20 ))
-        pointsBox.anchorPoint = CGPoint(x: 1.0, y: 0.5)
-        pointsBox.position = CGPoint(x: pointsLabel!.position.x + 10 , y: pointsLabel!.position.y)
+        pointsBox.anchorPoint = CGPoint(x: 0.0, y: 1.0)
+        pointsBox.position = CGPoint(x: pointsLabel!.position.x - 10 , y: pointsLabel!.position.y+9)
         pointsBox.zPosition = 190
         scene.addChild(pointsBox)
+        
+       
+        
+        retryButton = SKSpriteNode(texture: SKTexture(imageNamed: "quardatorestart-1") ,color: SKColor.white, size: CGSize(width: 64, height: 64 ))
+        retryButton?.name = "retry"
+        retryButton?.anchorPoint = CGPoint(x: 1.0, y: 1.0)
+        retryButton?.position = CGPoint(x: topRight.x - 8.0,y: topRight.y - 60)
+        retryButton?.zPosition = 200
+        scene.addChild(retryButton!)
+        
+        let retryBox = SKSpriteNode(texture: SKTexture(imageNamed: "quadratone"), color: SKColor.blue, size: CGSize(width: 64, height: 64 ))
+        retryBox.anchorPoint = CGPoint(x: 1.0, y: 1.0)
+        retryBox.position = CGPoint(x: retryButton!.position.x, y: retryButton!.position.y)
+        retryBox.zPosition = 190
+        scene.addChild(retryBox)
 
         
         if let playerComponent = player.component(ofType: WPSpriteComponent.self){
@@ -221,7 +237,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
         if let playerHealthComponent = player.component(ofType: WPHealthComponent.self){
             for i in 0..<playerHealthComponent.maxHearts {
                 let sprite = WPSpriteNode(texture: SKTexture(imageNamed: "heart-1"), size: CGSize(width: 32.0, height: 32.0))
-                sprite.position = CGPoint(x: (topLeft.x + CGFloat(32 * (i+1)) + CGFloat(4 * i)) , y: topLeft.y - 80.0)
+                sprite.position = CGPoint(x: (topLeft.x + CGFloat(32 * (i+1)) + CGFloat(4 * i)) , y: pointsBox.position.y-72)
                 sprite.name = "Heart\(i)"
                 sprite.zPosition = 200
                 scene.addChild(sprite)
