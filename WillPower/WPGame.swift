@@ -35,6 +35,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     var ignoreContacts: Bool = false
     let audioInstance = SKTAudio.sharedInstance()
     
+    
     var enemy: WPEntity
     var player: WPEntity
     var shield: WPEntity
@@ -44,6 +45,14 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     var score: Int = 0 {
         willSet {
             pointsLabel?.text = String(format: "%.6d", newValue)
+        }
+    }
+    var highestScore: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: "highestScore")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "highestScore")
         }
     }
     
