@@ -44,11 +44,18 @@ class WPScene: SKScene {
 
                 }
             
-            if touchedNode.name == "firstTime" || touchedNode.name == "press" || touchedNode.name == "title" || touchedNode.name == "overlayFirst" || touchedNode.name == "highScoreFirst"{
+            if touchedNode.name == "firstTime" || touchedNode.name == "overlayFirst" {
                 if let game = sceneDelegate as? WPGame {
                     game.start()
                 }
             }
+            }
+            if let touchedNode = nodeAtPoint as? SKLabelNode {
+                if touchedNode.name == "press" || touchedNode.name == "title" || touchedNode.name == "highScoreFirst"{
+                    if let game = sceneDelegate as? WPGame {
+                        game.start()
+                    }
+                }
             }
         }
     }
