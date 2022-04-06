@@ -22,7 +22,7 @@ class WPAttackComponent: GKComponent {
         }
     }
     var timeSpan: TimeInterval = 1.0
-    var remainingTime: TimeInterval = 5.0
+    var remainingTime: TimeInterval = 3.0
     var attackEnable: Bool = false
       
     init (withGame: WPGame, target: WPEntity, attacker: WPEntity) {

@@ -35,6 +35,7 @@ class WPScene: SKScene {
         if let touchedNode = nodeAtPoint as? SKSpriteNode{
             if touchedNode.name == "retry" {
                 let newGame = WPGame()
+                newGame.isFirstTime = false
                 let scene = newGame.scene
                 scene.size = (self.view?.frame.size)!
                 scene.scaleMode = .aspectFit
@@ -42,6 +43,12 @@ class WPScene: SKScene {
                 
 
                 }
+            
+            if touchedNode.name == "firstTime" || touchedNode.name == "press" || touchedNode.name == "title" || touchedNode.name == "overlayFirst" || touchedNode.name == "highScoreFirst"{
+                if let game = sceneDelegate as? WPGame {
+                    game.start()
+                }
+            }
             }
         }
     }

@@ -34,13 +34,15 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     var LevelStateMachine: GKStateMachine?
     var ignoreContacts: Bool = false
     let audioInstance = SKTAudio.sharedInstance()
-    
+    var isFirstTime: Bool = true
     
     var enemy: WPEntity
     var player: WPEntity
     var shield: WPEntity
     var pointsLabel: SKLabelNode?
     var retryButton: SKSpriteNode?
+    var firstMessage: SKLabelNode
+    var secondMessage: SKLabelNode
     
     var score: Int = 0 {
         willSet {
@@ -97,6 +99,23 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
         player = WPEntity()
         shield = WPEntity()
         enemy = WPEntity()
+        
+        firstMessage = SKLabelNode(text: "Are you ready to die?")
+        firstMessage.name = "firstMessage"
+        firstMessage.fontName = "VT323-Regular"
+        firstMessage.fontSize = 42.0
+        firstMessage.horizontalAlignmentMode = .center
+        firstMessage.verticalAlignmentMode = .center
+        
+        secondMessage = SKLabelNode(text: "  Swipe to move shield direction")
+        secondMessage.fontName = "VT323-Regular"
+        secondMessage.fontSize = 48.0
+        secondMessage.name = "secondMessage"
+        secondMessage.horizontalAlignmentMode = .center
+        secondMessage.verticalAlignmentMode = .center
+        secondMessage.numberOfLines = 2
+        secondMessage.preferredMaxLayoutWidth = 320
+        
         super.init()
         
        
@@ -272,49 +291,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
             if let magello = scene.childNode(withName: "magelloSprite") as? WPSpriteNode {
                 magello.run(SKAction(named: "magelloIdle")!)
             }
-            let sequence = SKAction.sequence([
-                SKAction.run {
-                    let firstMessage = SKLabelNode(text: "Are you ready to die?")
-                    firstMessage.name = "firstMessage"
-                    firstMessage.fontName = "VT323-Regular"
-                    firstMessage.fontSize = 42.0
-                    firstMessage.horizontalAlignmentMode = .center
-                    firstMessage.verticalAlignmentMode = .center
-                    firstMessage.position = CGPoint(x: sprite.position.x, y: sprite.position.y - 128 - 32)
-                    firstMessage.zPosition = 200
-                    scene.addChild(firstMessage)
-                    
-                    let secondMessage = SKLabelNode(text: "  Swipe to move shield direction")
-                    secondMessage.fontName = "VT323-Regular"
-                    secondMessage.fontSize = 48.0
-                    secondMessage.name = "secondMessage"
-                    secondMessage.horizontalAlignmentMode = .center
-                    secondMessage.verticalAlignmentMode = .center
-                    secondMessage.numberOfLines = 2
-                    secondMessage.preferredMaxLayoutWidth = 320
-                    
-                    secondMessage.position = CGPoint(x: self.center.x, y: self.center.y - 148 - 32)
-                    secondMessage.zPosition = 200
-                    scene.addChild(secondMessage)
-                    
-                },
-                SKAction.run {
-                    if let mess = scene.childNode(withName: "firstMessage") as? SKLabelNode {
-                        mess.run(SKAction.fadeOut(withDuration: 4.0))
-                    }
-                    if let mess2 = scene.childNode(withName: "secondMessage") as? SKLabelNode {
-                        mess2.run(SKAction.fadeOut(withDuration: 4.0))
-                    }
-                    
-                },
-                    SKAction.run{
-                        if let attackComp = self.enemy.component(ofType: WPAttackComponent.self){
-                            attackComp.attackEnable = true
-                        }
-                    }
-               
-            ])
-            scene.run(sequence)
+            
         }
         
         let shieldRing = SKSpriteNode(texture: SKTexture(imageNamed: "UI section-detached"), color: .white, size: CGSize(width: 128.0, height: 128.0))
@@ -340,7 +317,128 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
             
         }
         
+        firstMessage.position = CGPoint(x: center.x, y: center.y + 128 - 32)
+        firstMessage.zPosition = 200
+        self.scene.addChild(firstMessage)
         
+        secondMessage.position = CGPoint(x: self.center.x, y: self.center.y - 128 - 32)
+        secondMessage.zPosition = 200
+        self.scene.addChild(secondMessage)
+        
+        if isFirstTime {
+            let overlay = SKSpriteNode(color: SKColor.black, size: (scene.size))
+            overlay.position = center
+            overlay.alpha = 0.6
+            overlay.name = "overlayFirst"
+            overlay.zPosition = 500
+            
+            let block = SKSpriteNode(texture: SKTexture(imageNamed: "quadratone"), color: SKColor.blue, size: CGSize(width: 352 + 32, height: 352 + 128))
+            block.position = overlay.position
+            block.alpha = 1.0
+            block.name = "firstTime"
+            block.zPosition = 525
+            
+            let willPower = SKLabelNode(text: "WillPower")
+            willPower.position = CGPoint(x: block.position.x, y: block.position.y+128)
+            willPower.fontSize = 64 + 16
+            willPower.fontName = "VT323-Regular"
+            willPower.name = "title"
+            willPower.zPosition = 550
+            willPower.fontColor = SKColor(hue: 143/360, saturation: 28/100, brightness: 65/100, alpha: 1.0)
+            
+            let press = SKLabelNode(text: "tap anywhere to start")
+            press.position = CGPoint(x: block.position.x, y: block.position.y-128)
+            press.fontSize = 32
+            press.fontName = "VT323-Regular"
+            press.name = "press"
+            press.zPosition = 550
+            
+            
+            let highScoreLabel = SKLabelNode(text: "HIGH SCORE: \(String(format: "%.6d", highestScore))")
+            highScoreLabel.fontName = "VT323-Regular"
+            highScoreLabel.fontSize = 46.0
+            highScoreLabel.name = "highScoreFirst"
+            highScoreLabel.position = CGPoint(x: block.position.x, y: block.position.y)
+            highScoreLabel.zPosition = 550
+            
+            scene.addChild(overlay)
+            scene.addChild(block)
+            scene.addChild(willPower)
+            scene.addChild(press)
+            scene.addChild(highScoreLabel)
+            
+            
+
+        }else{
+            start()
+        }
+        
+    }
+    
+    func start() {
+        //self.isFirstTime = false
+        let sequence = SKAction.sequence([
+            SKAction.run {
+                if let overlay = self.scene.childNode(withName: "overlayFirst") as? SKSpriteNode {
+                    overlay.run(SKAction.fadeOut(withDuration: 1.0))
+                    
+                }
+                if let block = self.scene.childNode(withName: "firstTime") as? SKSpriteNode {
+                    block.run(SKAction.fadeOut(withDuration: 1.0))
+                    
+                }
+                if let willPower = self.scene.childNode(withName: "title") as? SKLabelNode {
+                    willPower.run(SKAction.fadeOut(withDuration: 1.0))
+                    
+                }
+                if let press = self.scene.childNode(withName: "press") as? SKLabelNode {
+                    press.run(SKAction.fadeOut(withDuration: 1.0))
+                    
+                }
+                if let high = self.scene.childNode(withName: "highScoreFirst") as? SKLabelNode {
+                    high.run(SKAction.fadeOut(withDuration: 1.0))
+                    
+                }
+            },
+            SKAction.wait(forDuration: 1.0),
+            SKAction.run {
+                if let overlay = self.scene.childNode(withName: "overlayFirst") as? SKSpriteNode {
+                    
+                    overlay.removeFromParent()
+                }
+                if let block = self.scene.childNode(withName: "firstTime") as? SKSpriteNode {
+                    
+                    block.removeFromParent()
+                }
+                if let willPower = self.scene.childNode(withName: "title") as? SKLabelNode {
+                    willPower.removeFromParent()
+                    
+                }
+                if let press = self.scene.childNode(withName: "press") as? SKLabelNode {
+                    press.removeFromParent()
+                    
+                }
+                if let high = self.scene.childNode(withName: "highScoreFirst") as? SKLabelNode {
+                    high.removeFromParent()
+                    
+                }
+
+                if let mess = self.scene.childNode(withName: "firstMessage") as? SKLabelNode {
+                    mess.run(SKAction.fadeOut(withDuration: 2.0))
+                }
+                if let mess2 = self.scene.childNode(withName: "secondMessage") as? SKLabelNode {
+                    mess2.run(SKAction.fadeOut(withDuration: 2.0))
+                }
+                
+            },
+                SKAction.run{
+                    if let attackComp = self.enemy.component(ofType: WPAttackComponent.self){
+                        attackComp.attackEnable = true
+                    }
+                }
+           
+        ])
+        self.scene.run(sequence)
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
