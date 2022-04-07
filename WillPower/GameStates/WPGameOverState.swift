@@ -36,7 +36,7 @@ class WPGameOverState: WPGameState {
             }
             
             if let newHighScore = game?.highestScore {
-                highScoreLabel = SKLabelNode(text: "HIGH SCORE: \(String(format: "%.6d", newHighScore))")
+                highScoreLabel = SKLabelNode(text: "HIGHSCORE: \(String(format: "%.6d", newHighScore))")
                 highScoreLabel?.fontName = "VT323-Regular"
                 highScoreLabel?.fontSize = 42.0
                 highScoreLabel?.name = "highScore"

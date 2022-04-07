@@ -174,10 +174,30 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
         
         // Update components with the new time delta.
         //        intelligenceSystem.update(deltaTime: dt)
+        if blockCounter != 0 && blockCounter%100 == 0 {
+            appearFaster()
+        }
         player.update(deltaTime: dt)
         enemy.update(deltaTime: dt)
         
         
+        
+        
+    }
+    func appearFaster() {
+    let label = SKLabelNode(text: "FASTER!")
+    label.fontName = "VT323-Regular"
+    label.fontSize = 42.0
+    label.horizontalAlignmentMode = .left
+    label.verticalAlignmentMode = .center
+    label.position = CGPoint(x: (pointsLabel?.position.x)! , y: (pointsLabel?.position.y)! - 256 - 32)
+    label.zPosition = 200
+    label.alpha = 0
+    scene.addChild(label)
+    label.run(SKAction.sequence([SKAction(named: "streakAppear")!,
+                                 SKAction.run {
+        label.removeFromParent()
+    }]))
     }
     
     func didMoveToView(scene: WPScene, view: SKView) {
@@ -242,6 +262,14 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
         retryBox.position = CGPoint(x: retryButton!.position.x, y: retryButton!.position.y)
         retryBox.zPosition = 190
         scene.addChild(retryBox)
+        
+        
+        let pillar = SKSpriteNode(texture: SKTexture(imageNamed: "pillar"), color: .brown, size: CGSize(width: 64 + 8, height: 64 + 8))
+        pillar.anchorPoint = CGPoint(x: 0.5, y: 1.0)
+        pillar.position = CGPoint(x: center.x, y: center.y - 32.0)
+        pillar.zPosition = 20
+        scene.addChild(pillar)
+        
 
         
         if let playerComponent = player.component(ofType: WPSpriteComponent.self){
@@ -294,11 +322,11 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
             
         }
         
-        let shieldRing = SKSpriteNode(texture: SKTexture(imageNamed: "UI section-detached"), color: .white, size: CGSize(width: 128.0, height: 128.0))
+        let shieldRing = SKSpriteNode(texture: SKTexture(imageNamed: "UI section-detached"), color: .gray, size: CGSize(width: 128.0, height: 128.0))
         shieldRing.position = player.position
         shieldRing.zPosition = 30
         shieldRing.name = "shieldRing"
-        shieldRing.colorBlendFactor = 1.0
+        shieldRing.alpha = 0.6
         scene.addChild(shieldRing)
         
         if let shieldComponent = shield.component(ofType: WPSpriteComponent.self){
@@ -354,7 +382,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
             press.zPosition = 550
             
             
-            let highScoreLabel = SKLabelNode(text: "HIGH SCORE: \(String(format: "%.6d", highestScore))")
+            let highScoreLabel = SKLabelNode(text: "HIGHSCORE: \(String(format: "%.6d", highestScore))")
             highScoreLabel.fontName = "VT323-Regular"
             highScoreLabel.fontSize = 46.0
             highScoreLabel.name = "highScoreFirst"

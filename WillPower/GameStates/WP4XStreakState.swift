@@ -29,6 +29,9 @@ class WP4XStreakState: WPGameState {
                                      SKAction.run {
             label.removeFromParent()
         }]))
+        if let scoreLabel = game?.pointsLabel {
+            scoreLabel.fontColor = .orange
+        }
     }
     
     override func willExit(to nextState: GKState) {

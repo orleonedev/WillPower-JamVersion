@@ -21,6 +21,7 @@ class WPAttackComponent: GKComponent {
             return SKRange(lowerLimit: (0.0 * CGFloat(game.multiplyer*game.multiplyer)), upperLimit: (3.0 * CGFloat(game.multiplyer)))
         }
     }
+    var velocity: TimeInterval = 1.0
     var timeSpan: TimeInterval = 1.0
     var remainingTime: TimeInterval = 3.0
     var attackEnable: Bool = false
@@ -40,6 +41,15 @@ class WPAttackComponent: GKComponent {
     
     override func update(deltaTime seconds: TimeInterval) {
         
+        if game.blockCounter != 0 && game.blockCounter%100 == 0 {
+            if velocity > 0.6 {
+                velocity -= 0.1
+                game.blockCounter += 1
+            }
+        }else if game.blockCounter == 0 {
+            velocity = 1.0
+        }
+        
        if attackEnable {
            self.remainingTime -= seconds
         
@@ -55,6 +65,7 @@ class WPAttackComponent: GKComponent {
             default:
                 shoot(from: .Up)
             }
+                
                 secondRandom = GKGaussianDistribution(randomSource: seed , lowestValue: 1*game.multiplyer/2, highestValue: 2*game.multiplyer - (game.multiplyer/2))
                 divider = Double(secondRandom.nextInt())
                 print("seed: \(divider)")
@@ -85,22 +96,23 @@ class WPAttackComponent: GKComponent {
         case .Up:
             projectile.position = CGPoint(x: game.player.position.x + offset, y: game.player.position.y + 168)
             projectile.zRotation = 89.55
-            projectile.run(SKAction.moveTo(y: target.position.y, duration: 1.0))
+            projectile.run(SKAction.moveTo(y: target.position.y, duration: velocity))
         case .Right:
             projectile.position = CGPoint(x: game.player.position.x + 168, y: game.player.position.y + offset )
             projectile.zRotation = 0
-            projectile.run(SKAction.moveTo(x: target.position.x, duration: 1.0))
+            projectile.run(SKAction.moveTo(x: target.position.x, duration: velocity))
         case .Down:
             projectile.position = CGPoint(x: game.player.position.x + offset, y: game.player.position.y - 168)
             projectile.zRotation = -89.55
-            projectile.run(SKAction.moveTo(y: target.position.y, duration: 1.0))
+            projectile.run(SKAction.moveTo(y: target.position.y, duration: velocity))
         case .Left:
             projectile.position = CGPoint(x: game.player.position.x - 168, y: game.player.position.y + offset)
             projectile.zRotation = 179.1
-            projectile.run(SKAction.moveTo(x: target.position.x, duration: 1.0))
+            projectile.run(SKAction.moveTo(x: target.position.x, duration: velocity))
         }
         
         game.scene.addChild(projectile)
+        
         
         
         

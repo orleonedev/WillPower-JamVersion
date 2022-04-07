@@ -30,6 +30,10 @@ class WP2XStreakState: WPGameState {
             label.removeFromParent()
         }]))
         
+        if let scoreLabel = game?.pointsLabel {
+            scoreLabel.fontColor = .green
+        }
+        
     }
     
     override func willExit(to nextState: GKState) {
