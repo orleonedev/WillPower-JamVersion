@@ -24,7 +24,7 @@ class WP2XStreakState: WPGameState {
         label.zPosition = 200
         label.alpha = 0
         game?.scene.addChild(label)
-        game?.multiplyer = 2
+        game?.multiplier = 2
         label.run(SKAction.sequence([SKAction(named: "streakAppear")!,
                                      SKAction.run {
             label.removeFromParent()

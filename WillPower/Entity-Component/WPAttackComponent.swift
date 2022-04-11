@@ -18,7 +18,7 @@ class WPAttackComponent: GKComponent {
     var attacker: WPEntity
     var frequencyRange: SKRange {
         get{
-            return SKRange(lowerLimit: (0.0 * CGFloat(game.multiplyer*game.multiplyer)), upperLimit: (3.0 * CGFloat(game.multiplyer)))
+            return SKRange(lowerLimit: (0.0 * CGFloat(game.multiplier*game.multiplier)), upperLimit: (3.0 * CGFloat(game.multiplier)))
         }
     }
     var velocity: TimeInterval = 1.0
@@ -66,7 +66,7 @@ class WPAttackComponent: GKComponent {
                 shoot(from: .Up)
             }
                 
-                secondRandom = GKGaussianDistribution(randomSource: seed , lowestValue: 1*game.multiplyer/2, highestValue: 2*game.multiplyer - (game.multiplyer/2))
+                secondRandom = GKGaussianDistribution(randomSource: seed , lowestValue: 1*game.multiplier/2, highestValue: 2*game.multiplier - (game.multiplier/2))
                 divider = Double(secondRandom.nextInt())
                 print("seed: \(divider)")
                 remainingTime = timeSpan * TimeInterval(1.0 / (divider + 1.0)) + 0.15

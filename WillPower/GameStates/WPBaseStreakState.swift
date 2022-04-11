@@ -20,7 +20,7 @@ class WPBaseStreakState: WPGameState {
                 self.stateMachine?.enter(WPGameOverState.self)
             }
         }
-        game?.multiplyer = 1
+        game?.multiplier = 1
         if let scoreLabel = game?.pointsLabel {
             scoreLabel.fontColor = .white
         }

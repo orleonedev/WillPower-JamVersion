@@ -74,7 +74,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
             }
         }
     }
-    var multiplyer: Int = 1
+    var multiplier: Int = 1
     var prevUpdateTime: TimeInterval = 0
     
 //    var shieldDirection: Directions {
@@ -526,7 +526,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
         projNode.run(sequence)
         
         if !ignoreContacts {
-            score += (1*multiplyer)
+            score += (1*multiplier)
             blockCounter += 1
         }
     }
