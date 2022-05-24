@@ -11,13 +11,16 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     
+    
     var game: WPGame?
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        
         game = WPGame()
+        game?.viewDelegate = self
         if let scene = game?.scene {
             // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFit

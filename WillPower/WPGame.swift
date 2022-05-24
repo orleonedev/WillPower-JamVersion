@@ -8,6 +8,7 @@
 import Foundation
 import SpriteKit
 import GameplayKit
+import GameKit
 
 enum Directions {
     case Up, Right, Down, Left
@@ -22,7 +23,53 @@ struct PhysicsCategory {
     static let enemy:       UInt32 = 0b1000
 }
 
-class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
+class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate, GKGameCenterControllerDelegate {
+    
+    
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func authenticateLocalPlayer(){
+        let localPlayer :GKLocalPlayer = GKLocalPlayer.local
+        
+        localPlayer.authenticateHandler = {(ViewController, error) -> Void in
+            if((ViewController) != nil) {
+                // 1. Show login if player is not logged in
+                ViewController?.present(ViewController!, animated: true, completion: nil)
+            } else if (localPlayer.isAuthenticated) {
+                // 2. Player is already authenticated & logged in, load game center
+                self.gcEnabled = true
+                
+                // Get the default leaderboard ID
+                localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
+                    if error != nil { print(error)
+                    } else { self.gcDefaultLeaderboard = leaderboardIdentifer! }
+                })
+                
+            } else {
+                // 3. Game center is not enabled on the users device
+                self.gcEnabled = false
+                print("Local player could not be authenticated!")
+                print(error)
+            }
+        }
+    }
+    
+    func showLeaderboard() {
+        print("SHOW LEADERBOARD")
+        let viewController = GKGameCenterViewController(leaderboardID: LEADERBOARD_ID, playerScope: .global, timeScope: .allTime)
+        viewController.gameCenterDelegate = self
+        
+        viewDelegate?.present(viewController, animated: true, completion: nil)
+    }
+    
+    var viewDelegate: UIViewController?
+    
+    var gcEnabled = Bool()
+    var gcDefaultLeaderboard = String()
+    let LEADERBOARD_ID = "highest_score"
+    
     
     let swipeRightRecog = UISwipeGestureRecognizer()
     let swipeLeftRecog = UISwipeGestureRecognizer()
@@ -43,6 +90,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     var retryButton: SKSpriteNode?
     var firstMessage: SKLabelNode
     var secondMessage: SKLabelNode
+    let leaderboardSprite: SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "cup"), color: .yellow, size: CGSize(width: 64, height: 64))
     
     var score: Int = 0 {
         willSet {
@@ -55,6 +103,9 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "highestScore")
+            GKLeaderboard.submitScore(newValue, context: 0, player: GKLocalPlayer.local,
+                leaderboardIDs: [LEADERBOARD_ID]) { error in
+            }
         }
     }
     
@@ -93,6 +144,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
     
     
     override init() {
+        
         random = GKGaussianDistribution(randomSource: GKRandomSource(), mean: 1.0, deviation: 0.75)
         
         
@@ -118,6 +170,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
         
         super.init()
         
+        authenticateLocalPlayer()
        
         let base = WPBaseStreakState(withGame: self)
         let double = WP2XStreakState(withGame: self)
@@ -374,6 +427,13 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
             willPower.zPosition = 550
             willPower.fontColor = SKColor(hue: 143/360, saturation: 28/100, brightness: 65/100, alpha: 1.0)
             
+            leaderboardSprite.name = "cup"
+            leaderboardSprite.position = block.position
+            leaderboardSprite.alpha = 1.0
+            leaderboardSprite.zPosition = 560
+            
+            
+            
             let press = SKLabelNode(text: "tap anywhere to start")
             press.position = CGPoint(x: block.position.x, y: block.position.y-128)
             press.fontSize = 32
@@ -394,6 +454,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
             scene.addChild(willPower)
             scene.addChild(press)
             scene.addChild(highScoreLabel)
+            scene.addChild(leaderboardSprite)
             
             
 
@@ -415,6 +476,8 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
                     block.run(SKAction.fadeOut(withDuration: 1.0))
                     
                 }
+                self.leaderboardSprite.run(SKAction.fadeOut(withDuration: 0.5))
+                
                 if let willPower = self.scene.childNode(withName: "title") as? SKLabelNode {
                     willPower.run(SKAction.fadeOut(withDuration: 1.0))
                     
@@ -438,6 +501,9 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
                     
                     block.removeFromParent()
                 }
+                
+                self.leaderboardSprite.removeFromParent()
+                
                 if let willPower = self.scene.childNode(withName: "title") as? SKLabelNode {
                     willPower.removeFromParent()
                     

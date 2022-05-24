@@ -49,6 +49,12 @@ class WPScene: SKScene {
                     game.start()
                 }
             }
+            
+            if touchedNode.name == "cup" {
+                if let game = sceneDelegate as? WPGame {
+                    game.showLeaderboard()
+                }
+            }
             }
             if let touchedNode = nodeAtPoint as? SKLabelNode {
                 if touchedNode.name == "press" || touchedNode.name == "title" || touchedNode.name == "highScoreFirst"{

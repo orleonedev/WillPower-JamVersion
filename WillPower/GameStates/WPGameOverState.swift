@@ -63,6 +63,11 @@ class WPGameOverState: WPGameState {
             block.name = "block"
             block.zPosition = 525
             
+            game?.leaderboardSprite.position = block.position
+            game?.leaderboardSprite.alpha = 0.0
+            game?.leaderboardSprite.name = "cup"
+            game?.leaderboardSprite.zPosition = 560
+            game?.leaderboardSprite.removeAllActions()
             
             
             let retry = SKSpriteNode(texture: SKTexture(imageNamed: "quardatorestart-1") ,color: SKColor.white, size: CGSize(width: 264 - 48, height: 256 - 48 ))
@@ -76,6 +81,7 @@ class WPGameOverState: WPGameState {
             game?.scene.addChild(finalScore!)
             game?.scene.addChild(highScoreLabel!)
             game?.scene.addChild(retry)
+            game?.scene.addChild(game!.leaderboardSprite)
             
             game?.audioInstance.backgroundMusicPlayer?.setVolume(0.05, fadeDuration: 1.0)
             overlay.run(SKAction.fadeAlpha(to: 0.6, duration: 0.5 ))
@@ -83,6 +89,7 @@ class WPGameOverState: WPGameState {
             retry.run(SKAction.fadeAlpha(to: 1.0, duration: 0.5 ))
             finalScore?.run(SKAction.fadeAlpha(to: 1.0, duration: 0.5 ))
             highScoreLabel?.run(SKAction.fadeAlpha(to: 1.0, duration: 0.5))
+            game?.leaderboardSprite.run(SKAction.fadeIn(withDuration: 0.5))
             
             
         }
