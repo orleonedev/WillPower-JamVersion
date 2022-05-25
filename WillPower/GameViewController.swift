@@ -8,16 +8,20 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import GameKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, GKGameCenterControllerDelegate {
     
+    var gcEnabled = Bool()
+    var gcDefaultLeaderboard = String()
+    let LEADERBOARD_ID = "highest_score"
     
     var game: WPGame?
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        authenticateLocalPlayer()
         
         game = WPGame()
         game?.viewDelegate = self
@@ -53,5 +57,41 @@ class GameViewController: UIViewController {
         return true
     }
     
+    func showLeaderboard() {
+        print("SHOW LEADERBOARD")
+        let viewController = GKGameCenterViewController(leaderboardID: LEADERBOARD_ID, playerScope: .global, timeScope: .allTime)
+        viewController.gameCenterDelegate = self
+        
+        present(viewController, animated: true, completion: nil)
+    }
     
+    func authenticateLocalPlayer(){
+        let localPlayer :GKLocalPlayer = GKLocalPlayer.local
+        
+        localPlayer.authenticateHandler = {(ViewController, error) -> Void in
+            if((ViewController) != nil) {
+                // 1. Show login if player is not logged in
+                ViewController?.present(ViewController!, animated: true, completion: nil)
+            } else if (localPlayer.isAuthenticated) {
+                // 2. Player is already authenticated & logged in, load game center
+                self.gcEnabled = true
+                
+                // Get the default leaderboard ID
+                localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
+                    if error != nil { print(error)
+                    } else { self.gcDefaultLeaderboard = leaderboardIdentifer! }
+                })
+                
+            } else {
+                // 3. Game center is not enabled on the users device
+                self.gcEnabled = false
+                print("Local player could not be authenticated!")
+                print(error)
+            }
+        }
+    }
+    
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true, completion: nil)
+    }
 }

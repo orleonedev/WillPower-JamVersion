@@ -35,6 +35,9 @@ class WPScene: SKScene {
         if let touchedNode = nodeAtPoint as? SKSpriteNode{
             if touchedNode.name == "retry" {
                 let newGame = WPGame()
+                if let game = sceneDelegate as? WPGame {
+                    newGame.viewDelegate = game.viewDelegate
+                }
                 newGame.isFirstTime = false
                 let scene = newGame.scene
                 scene.size = (self.view?.frame.size)!
@@ -52,7 +55,9 @@ class WPScene: SKScene {
             
             if touchedNode.name == "cup" {
                 if let game = sceneDelegate as? WPGame {
-                    game.showLeaderboard()
+                    if let view = game.viewDelegate as? GameViewController {
+                        view.showLeaderboard()
+                    }
                 }
             }
             }
