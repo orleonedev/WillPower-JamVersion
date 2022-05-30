@@ -43,8 +43,6 @@ class WPScene: SKScene {
                 scene.size = (self.view?.frame.size)!
                 scene.scaleMode = .aspectFit
                 view?.presentScene(scene, transition: .fade(withDuration: 1.5))
-                
-
                 }
             
             if touchedNode.name == "firstTime" || touchedNode.name == "overlayFirst" {

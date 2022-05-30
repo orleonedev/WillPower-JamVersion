@@ -370,7 +370,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
             overlay.name = "overlayFirst"
             overlay.zPosition = 500
             
-            let block = SKSpriteNode(texture: SKTexture(imageNamed: "quadratone"), color: SKColor.blue, size: CGSize(width: 352 + 32, height: 352 + 128))
+            let block = SKSpriteNode(texture: SKTexture(imageNamed: "quadratone"), color: SKColor.blue, size: CGSize(width: 384, height: 480))
             block.position = overlay.position
             block.alpha = 1.0
             block.name = "firstTime"
@@ -385,7 +385,9 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
             willPower.fontColor = SKColor(hue: 143/360, saturation: 28/100, brightness: 65/100, alpha: 1.0)
             
             leaderboardSprite.name = "cup"
-            leaderboardSprite.position = block.position
+            let xpos = block.position.x
+            let ypos = willPower.position.y - 48
+            leaderboardSprite.position = CGPoint(x: xpos, y: ypos)
             leaderboardSprite.alpha = 1.0
             leaderboardSprite.zPosition = 560
             

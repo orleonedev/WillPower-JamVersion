@@ -20,12 +20,26 @@ class WPGameOverState: WPGameState {
     override func didEnter(from previousState: GKState?) {
         print("GameOver")
         
+        let overlay = SKSpriteNode(color: SKColor.black, size: (game?.scene.size)!)
+        overlay.position = game!.center
+        overlay.alpha = 0.0
+        overlay.name = "overlay"
+        overlay.zPosition = 500
+        
+        let block = SKSpriteNode(texture: SKTexture(imageNamed: "quadratone"), color: SKColor.blue, size: CGSize(width: 352 + 32, height: 352 + 32))
+        block.position = overlay.position
+        block.alpha = 0.0
+        block.name = "block"
+        block.zPosition = 525
+        
         if let scoreValue = game?.score{
             finalScore = SKLabelNode(text: String(format: "%.6d", scoreValue))
             finalScore?.fontName = "VT323-Regular"
             finalScore?.fontSize = 64 + 16
+            finalScore?.horizontalAlignmentMode = .right
+            finalScore?.verticalAlignmentMode = .center
             finalScore?.name = "finalscore"
-            finalScore?.position = CGPoint(x: game!.center.x, y: game!.center.y + 64 + 32)
+            finalScore?.position = CGPoint(x: block.position.x + 48, y: block.position.y + 128)
             finalScore?.zPosition = 550
             finalScore?.alpha = 0.0
             
@@ -50,20 +64,15 @@ class WPGameOverState: WPGameState {
         if let attComp = game?.enemy.component(ofType: WPAttackComponent.self){
             attComp.attackEnable = false
             game?.ignoreContacts = true
-            
-            let overlay = SKSpriteNode(color: SKColor.black, size: (game?.scene.size)!)
-            overlay.position = game!.center
-            overlay.alpha = 0.0
-            overlay.name = "overlay"
-            overlay.zPosition = 500
-            
-            let block = SKSpriteNode(texture: SKTexture(imageNamed: "quadratone"), color: SKColor.blue, size: CGSize(width: 352 + 32, height: 352 + 32))
-            block.position = overlay.position
-            block.alpha = 0.0
-            block.name = "block"
-            block.zPosition = 525
-            
-            game?.leaderboardSprite.position = block.position
+        }
+        
+        if let label = finalScore {
+            let xpos = label.position.x + 64
+            let ypos = label.position.y
+            game?.leaderboardSprite.position = CGPoint(x: xpos, y: ypos)
+        }
+        
+        
             game?.leaderboardSprite.alpha = 0.0
             game?.leaderboardSprite.name = "cup"
             game?.leaderboardSprite.zPosition = 560
@@ -92,7 +101,7 @@ class WPGameOverState: WPGameState {
             game?.leaderboardSprite.run(SKAction.fadeIn(withDuration: 0.5))
             
             
-        }
+        
 
     }
     
