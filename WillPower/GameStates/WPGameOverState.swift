@@ -72,6 +72,12 @@ class WPGameOverState: WPGameState {
             game?.leaderboardSprite.position = CGPoint(x: xpos, y: ypos)
         }
         
+        let cupSize = CGSize(width: (game?.leaderboardSprite.size.width)! + 2 , height: (game?.leaderboardSprite.size.height)! + 4)
+        let blockLead = SKSpriteNode(texture: SKTexture(imageNamed: "quadratone"), color: SKColor.blue, size: cupSize)
+        blockLead.position = CGPoint(x: (game?.leaderboardSprite.position.x)!, y: (game?.leaderboardSprite.position.y)! - 4)
+        blockLead.alpha = 0.0
+        blockLead.name = "blockLead"
+        blockLead.zPosition = 555
         
             game?.leaderboardSprite.alpha = 0.0
             game?.leaderboardSprite.name = "cup"
@@ -91,6 +97,7 @@ class WPGameOverState: WPGameState {
             game?.scene.addChild(highScoreLabel!)
             game?.scene.addChild(retry)
             game?.scene.addChild(game!.leaderboardSprite)
+        game?.scene.addChild(blockLead)
             
             game?.audioInstance.backgroundMusicPlayer?.setVolume(0.05, fadeDuration: 1.0)
             overlay.run(SKAction.fadeAlpha(to: 0.6, duration: 0.5 ))
@@ -99,6 +106,8 @@ class WPGameOverState: WPGameState {
             finalScore?.run(SKAction.fadeAlpha(to: 1.0, duration: 0.5 ))
             highScoreLabel?.run(SKAction.fadeAlpha(to: 1.0, duration: 0.5))
             game?.leaderboardSprite.run(SKAction.fadeIn(withDuration: 0.5))
+            blockLead.run(SKAction.fadeIn(withDuration: 0.5))
+
             
             
         

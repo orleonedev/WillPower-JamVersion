@@ -385,12 +385,20 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
             willPower.fontColor = SKColor(hue: 143/360, saturation: 28/100, brightness: 65/100, alpha: 1.0)
             
             leaderboardSprite.name = "cup"
-            let xpos = block.position.x
+            let xpos = block.position.x + 88
             let ypos = willPower.position.y - 48
             leaderboardSprite.position = CGPoint(x: xpos, y: ypos)
             leaderboardSprite.alpha = 1.0
             leaderboardSprite.zPosition = 560
             
+            let LeadLabel = SKLabelNode(text: "Leaderboard")
+            LeadLabel.fontName = "VT323-Regular"
+            LeadLabel.fontSize = 38.0
+            LeadLabel.name = "leaderboard"
+            LeadLabel.verticalAlignmentMode = .center
+            LeadLabel.horizontalAlignmentMode = .right
+            LeadLabel.position = CGPoint(x: xpos - 32, y: ypos)
+            LeadLabel.zPosition = 550
             
             
             let press = SKLabelNode(text: "tap anywhere to start")
@@ -414,6 +422,7 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
             scene.addChild(press)
             scene.addChild(highScoreLabel)
             scene.addChild(leaderboardSprite)
+            scene.addChild(LeadLabel)
             
             
 
@@ -449,6 +458,10 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
                     high.run(SKAction.fadeOut(withDuration: 1.0))
                     
                 }
+                if let lead = self.scene.childNode(withName: "leaderboard") as? SKLabelNode {
+                    lead.run(SKAction.fadeOut(withDuration: 1.0))
+                    
+                }
             },
             SKAction.wait(forDuration: 1.0),
             SKAction.run {
@@ -473,6 +486,10 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
                 }
                 if let high = self.scene.childNode(withName: "highScoreFirst") as? SKLabelNode {
                     high.removeFromParent()
+                    
+                }
+                if let lead = self.scene.childNode(withName: "leaderboard") as? SKLabelNode {
+                    lead.removeFromParent()
                     
                 }
 

@@ -65,6 +65,13 @@ class WPScene: SKScene {
                         game.start()
                     }
                 }
+                if touchedNode.name == "leaderboard" {
+                    if let game = sceneDelegate as? WPGame {
+                        if let view = game.viewDelegate as? GameViewController {
+                            view.showLeaderboard()
+                        }
+                    }
+                }
             }
         }
     }
