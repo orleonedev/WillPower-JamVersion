@@ -61,9 +61,9 @@ class WPGame: NSObject, SceneDelegate, SKPhysicsContactDelegate {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "highestScore")
-            GKLeaderboard.submitScore(newValue, context: 0, player: GKLocalPlayer.local,
-                                      leaderboardIDs: ["highest_score"]) { error in
-            }
+//            GKLeaderboard.submitScore(newValue, context: 0, player: GKLocalPlayer.local,
+//                                      leaderboardIDs: ["highest_score"]) { error in
+//            }
         }
     }
     

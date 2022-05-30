@@ -25,6 +25,14 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate {
         
         game = WPGame()
         game?.viewDelegate = self
+//        if GKLocalPlayer.local.isAuthenticated {
+//            if let userdefault = game?.highestScore {
+//                GKLeaderboard.submitScore(userdefault, context: 0, player: GKLocalPlayer.local,
+//                                          leaderboardIDs: ["highest_score"]) { error in
+//                }
+//            }
+//            
+//        }
         if let scene = game?.scene {
             // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFit

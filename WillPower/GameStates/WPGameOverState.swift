@@ -6,6 +6,7 @@
 //
 
 import GameplayKit
+import GameKit
 
 class WPGameOverState: WPGameState {
     
@@ -43,10 +44,18 @@ class WPGameOverState: WPGameState {
             finalScore?.zPosition = 550
             finalScore?.alpha = 0.0
             
+            
+            
             if let highScore = game?.highestScore {
                 if scoreValue > highScore {
                     game?.highestScore = scoreValue
                 }
+                if let after = game?.highestScore {
+                    GKLeaderboard.submitScore(after, context: 0, player: GKLocalPlayer.local,
+                                              leaderboardIDs: ["highest_score"]) { error in
+                    }
+                }
+                
             }
             
             if let newHighScore = game?.highestScore {
